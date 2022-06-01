@@ -10,6 +10,10 @@ const { verify } = require('crypto');
 const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 
+router.get("/",(req,res)=>{
+    res.send("Running");
+})
+
 router.post('/signup', async (req, res) => {
 
     let first_name = req.body.first_name;
