@@ -100,7 +100,7 @@ router.post('/forget-password', async (req, res) => {
         const token = jwt.sign(payload, secret, {expiresIn: '15m'});
         const link = `https://gousergo.herokuapp.com/api/users/reset-password/${thisuser._id}/${token}`;
         console.log(link);
-        res.status(200).send("Password reset link has been sent to your email...");
+        res.status(200).send(link);
 
 
     }
