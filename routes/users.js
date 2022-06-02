@@ -48,7 +48,6 @@ router.get('/google/callback',
 router.get('/logout', (req,res)=>{
     req.session = null;
     req.logout((err)=>{
-        if (err) {return next(err);}
         res.redirect('api/users/');
     });
 })
