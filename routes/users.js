@@ -8,14 +8,49 @@ const { verify } = require('crypto');
 const bcrypt = require('bcrypt');
 const userOTPverification = require('../models/userOTPverification');
 const { route } = require('express/lib/application');
-
-
+const passport = require("passport");
 const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
+
+const isLoggedIn = (req, res, next)=>{
+    if(req.user){
+        next();
+    }
+    else{
+        res.sendStatus(401);
+    }
+}
 
 router.get("/", (req, res) => {
     res.send("Running");
 })
+
+router.get("/failure", (req, res) => {
+    res.send("Google login failed");
+})
+
+router.get("/success", isLoggedIn, (req, res) => {
+    res.send(`Google login success ${req.user.displayName}`);
+})
+
+router.get('/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+
+router.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/failure' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/success');
+  });
+
+
+router.get('/logout', (req,res)=>{
+    req.session = null;
+    req.logOut();
+    res.redirect('/');
+})
+
 
 router.post('/signup', async (req, res) => {
 
