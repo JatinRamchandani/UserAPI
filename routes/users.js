@@ -66,8 +66,13 @@ const sendOTPVerificationEmail = async ({ _id, email }, res) => {
 
         await newOTPVerification.save();
         console.log(otp);
+
+
+        // I know how to email the otp but for security reasons now,
+        // I am sending otp in reponse 
         res.json({
             status: "PENDING",
+            otp: otp,
             message: "Verification otp sent",
             data: {
                 userId: _id,
@@ -86,7 +91,7 @@ const sendOTPVerificationEmail = async ({ _id, email }, res) => {
 router.post('/verifyOTP', async (req, res) => {
     try{
         let {userId, otp} = req.body;
-        
+
         if(!userId || !otp){
             throw Error("Empty otp details are not allowed");
         }
