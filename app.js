@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({extended:true}))
 //     keys: ['key1', 'key2']
 // }))
 
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
+app.use(expressSession({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 app.use(passport.initialize())
 app.use(passport.session())
