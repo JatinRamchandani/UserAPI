@@ -25,6 +25,8 @@ router.get("/", (req, res) => {
     res.send("Running");
 })
 
+
+// Google Oauth starts here
 router.get("/failure", (req, res) => {
     res.send("Google login failed");
 })
@@ -53,6 +55,10 @@ router.get('/logout', (req,res)=>{
     });
 })
 
+// Google Oauth ends here
+
+
+// User Registration API
 
 router.post('/signup', async (req, res) => {
 
@@ -202,6 +208,9 @@ router.post('/resendOTP', async(req, res)=>{
 
 
 
+
+// User Login API
+
 router.post('/login', async (req, res) => {
 
     let email = req.body.email;
@@ -228,6 +237,8 @@ router.post('/login', async (req, res) => {
 
 })
 
+
+// Forget Password API
 
 router.post('/forget-password', async (req, res) => {
 
@@ -263,6 +274,7 @@ router.post('/forget-password', async (req, res) => {
 
 
 })
+
 
 
 router.get('/reset-password/:id/:token/', async (req, res) => {
