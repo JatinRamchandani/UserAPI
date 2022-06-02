@@ -48,7 +48,8 @@ router.get('/google/callback',
 router.get('/logout', (req,res)=>{
     req.session = null;
     req.logout((err)=>{
-        res.render('/api/users/');
+        //here should specify a page to redirect on frontend
+        res.redirect('/api/users/');
     });
 })
 
