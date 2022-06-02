@@ -9,6 +9,7 @@ const port=process.env.PORT || 8000;
 const passport = require("passport");
 const usersRouter=require('./routes/users');
 const cookieSession = require('cookie-session')
+const expressSession = require('express-session')
 require('./passport-setup')
 
 
@@ -21,10 +22,12 @@ db.once('open',()=>console.log("Connected to database"));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended:true}))
 
-app.use(cookieSession({
-    name: 'user-session',
-    keys: ['key1', 'key2']
-}))
+// app.use(cookieSession({
+//     name: 'user-session',
+//     keys: ['key1', 'key2']
+// }))
+
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}))
 
 app.use(passport.initialize())
 app.use(passport.session())
