@@ -13,7 +13,7 @@ passport.deserializeUser((user, done)=>{
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://documenter.getpostman.com/view/21266848/Uz5FKcBS"
+    callbackURL: "https://gousergo.herokuapp.com/api/users/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
       return done(null, profile);
