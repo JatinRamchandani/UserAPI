@@ -38,17 +38,17 @@ router.get('/google',
 
 
 router.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/failure' }),
+  passport.authenticate('google', { failureRedirect: '/api/users/failure' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/success');
+    res.redirect('/api/users/success');
   });
 
 
 router.get('/logout', (req,res)=>{
     req.session = null;
     req.logOut();
-    res.redirect('/');
+    res.redirect('api/users/');
 })
 
 
